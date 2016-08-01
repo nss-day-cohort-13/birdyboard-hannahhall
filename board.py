@@ -2,6 +2,7 @@ class Birdyboard():
     def __init__(self):
         self.users = list()
         self.currentUser = None
+        self.publicChirps = list()
 
     def menu(self):
         print("""
@@ -44,8 +45,8 @@ class Birdyboard():
         self.currentUser = self.users[index]
         return self.currentUser
 
-    def newPublicChirp(self, choice):
-        pass
+    def newPublicChirp(self, message):
+        self.publicChirps.append({self.currentUser[1]: message})
 
 # board = Birdyboard()
 # board.menu()

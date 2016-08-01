@@ -16,9 +16,10 @@ class Testboard(unittest.TestCase):
 
     def test_new_public_chirp(self):
         self.board.selectUser(1)
+        print(self.board.currentUser)
         newMessage = "Hello World"
-        self.board.new_public_chirp(newMessage)
-        self.assertIn({'username': 'Hello World'}, board.publicMessages)
+        self.board.newPublicChirp(newMessage)
+        self.assertIn({'username': 'Hello World'}, self.board.publicChirps)
 
 
 
