@@ -20,7 +20,8 @@ class Testboard(unittest.TestCase):
         self.board.selectUser(1)
         newchirp = "Hello World"
         self.board.newPublicChirp(newchirp)
-        self.assertIn({'username': 'Hello World'}, self.board.publicChirps)
+        for key, value in self.board.chirps['public'].items():
+            self.assertIn({'username': 'Hello World'}, value)
 
     def test_new_private_chirp(self):
         # creating current user
@@ -29,11 +30,12 @@ class Testboard(unittest.TestCase):
         self.board.selectUser(2)
         newChirp = "Hello gary!"
         self.board.newPrivateChirp(newChirp, self.board.privateRecip)
-        for key, value in self.board.privateChirps.items():
+        for key, value in self.board.chirps['private'].items():
             self.assertEqual([{'username', 'gary101', key}, ('username', 'Hello gary!')], value)
 
     def test_chirp_list_view(self):
-        pass
+        self.board.selectUser(1)
+
 
 
 
