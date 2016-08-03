@@ -1,4 +1,4 @@
-import random
+import uuid
 import pickle
 from user import *
 from chirp import *
@@ -115,12 +115,12 @@ class Birdyboard:
             return self.privateRecip
 
     def newPublicChirp(self, message):
-        key = random.randint(1, 1000)
+        key = uuid.uuid4()
         self.chirps['public'][key] = PublicMessage(self.currentUser.username, message)
         self.serializeMessages(self.boardfile)
 
     def newPrivateChirp(self, message, recipient):
-        key = random.randint(1, 1000)
+        key = uuid.uuid4()
         self.chirps['private'][key] = PrivateMessage(self.currentUser.username, self.privateRecip.username, message)
         self.serializeMessages(self.boardfile)
 
