@@ -145,5 +145,5 @@ class Birdyboard:
                 self.userPrivateChirps[key] = value
 
 if __name__ == '__main__':
-    board = Birdyboard('board.txt', 'users.txt')
+    board = Birdyboard('txt_files/board.txt', 'txt_files/users.txt')
     board.menu()

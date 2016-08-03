@@ -4,7 +4,7 @@ from board import *
 class Testboard(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.board = Birdyboard('test_board.txt', 'test_users.txt')
+        self.board = Birdyboard('txt_files/test_board.txt', 'txt_files/test_users.txt')
 
     def test_new_user(self):
         self.board.newUser('name', 'username')
