@@ -9,7 +9,6 @@ class Birdyboard:
     def __init__(self, boardfile, userfile):
         """
         On class creation this function opens corrisponding files and loads the data to chosen variables
-        
         """
         self.currentUser = None
         self.privateRecip = None
@@ -30,6 +29,7 @@ class Birdyboard:
             self.users = []
 
     def deserializeChirps(self, filename):
+        """Deserialize chirp file"""
         try:
             with open(filename, 'rb+') as f:
                 self.chirps = pickle.load(f)
@@ -40,6 +40,7 @@ class Birdyboard:
         return self.chirps
 
     def deserializeUsers(self, filename):
+        """Deserialize user file"""
         try:
             with open(filename, 'rb+') as f:
                 self.users = pickle.load(f)
@@ -48,14 +49,18 @@ class Birdyboard:
         return self.users
 
     def serializeUsers(self, filename):
+        """Serialize user file"""
         with open(filename, 'wb+') as f:
             pickle.dump(self.users, f)
 
     def serializeMessages(self, filename):
+        """Serialize chirp file"""
         with open(filename, 'wb+') as f:
             pickle.dump(self.chirps, f)
 
     def menu(self):
+        """Function to show the main menu with 6 options"""
+
         print("""
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>
 <<<         <<<Birdyboard>>>         >>>
@@ -117,6 +122,7 @@ class Birdyboard:
             self.menu()
 
     def printAllUsers(self):
+        """Prints a list of users"""
         userLength = len(self.users)
         counter = 1
         for user in self.users:
@@ -124,6 +130,7 @@ class Birdyboard:
             counter += 1
 
     def newUser(self, name, username):
+        """Creates a new user and stores it in file and as currentUser"""
         existingUsers = []
         for user in self.users:
             existingUsers.append(user.username)
@@ -134,26 +141,31 @@ class Birdyboard:
             self.serializeUsers(self.userfile)
 
     def selectUser(self, choice):
+        """Selects a user to post chirps as"""
         index = choice - 1
         self.currentUser = self.users[index]
         return self.currentUser
 
     def selectRecipient(self, choice):
+        """Selects recipient of private chirps"""
         index = choice - 1
         self.privateRecip = self.users[index]
         return self.privateRecip
 
     def newPublicChirp(self, message):
+        """Creates a new public chirp and adds it to the board file"""
         key = uuid.uuid4()
         self.chirps['public'][key] = PublicMessage(self.currentUser.username, message)
         self.serializeMessages(self.boardfile)
 
     def newPrivateChirp(self, message, recipient):
+        """Creates a new private chirp and adds it to the board file"""
         key = uuid.uuid4()
         self.chirps['private'][key] = PrivateMessage(self.currentUser.username, self.privateRecip.username, message)
         self.serializeMessages(self.boardfile)
 
     def chirpMenu(self):
+        """Menu that lists all of a users private and public chirps"""
         self.findPrivateChirps()
         print('<<<<<Private Chirps>>>>>')
         counter = 1
@@ -179,6 +191,10 @@ class Birdyboard:
             self.replyMenu(message)
 
     def getListofChirps(self):
+        """
+        Appends to a list all of a users private and public chirps.
+        Used to find the corresponding chirp in self.chirps
+        """
         self.findPrivateChirps()
         try:
             for key, value in self.userPrivateChirps.items():
@@ -194,6 +210,7 @@ class Birdyboard:
 
 
     def findPrivateChirps(self):
+        """Find current users private chirps"""
         for key, value in self.chirps['private'].items():
             if (self.currentUser.username == value.sender) or (self.currentUser.username == value.receiver):
                 self.userPrivateChirps[key] = value
@@ -203,12 +220,14 @@ class Birdyboard:
                 return self.userPrivateChirps
 
     def printConversation(self, message):
+        """Print's an individual chirp's reply's"""
         print(message.sender + ': ' + message.message)
         for reply in message.conversation:
             for key in reply:
                 print(key + ': ' + reply[key])
 
     def replyMenu(self, conversation):
+        """Prompts the user to either reply to message or go back to chirp menu"""
         self.clearScreen()
         self.printConversation(conversation)
         userchoice = input('1. Reply \n2. Go Back \n> ')
@@ -223,6 +242,7 @@ class Birdyboard:
             self.chirpMenu()
 
     def reply(self, reply, conversation):
+        """Searches for chosen message in message file and appends a reply to its conversation list"""
         for key, value in self.chirps['public'].items():
             if value == conversation:
                 value.reply(self.currentUser.username, reply)
@@ -233,9 +253,11 @@ class Birdyboard:
                 self.serializeMessages(self.boardfile)
 
     def clearScreen(self):
+        """Clears cli of clutter"""
         os.system('clear')
 
     def checkForUser(self):
+        """Checks to make sure user has chosen a current user before reading or creating chirps"""
         self.clearScreen()
         print("Please select or create a new user before continuing")
         self.menu()
