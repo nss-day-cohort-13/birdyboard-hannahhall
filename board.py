@@ -104,7 +104,7 @@ class Birdyboard:
                 message = input('Enter Chirp: \n> ')
                 self.newPrivateChirp(message, recipient)
                 self.clearScreen()
-                self.menu()
+                self.chirpMenu()
         elif choice == '6':
             sys.exit()
         else:
@@ -126,6 +126,7 @@ class Birdyboard:
         if not username in existingUsers:
             user = User(name, username)
             self.users.append(user)
+            self.currentUser = user
             self.serializeUsers(self.userfile)
 
     def selectUser(self, choice):
