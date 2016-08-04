@@ -237,5 +237,5 @@ class Birdyboard:
 
 
 if __name__ == '__main__':
-    board = Birdyboard('txt_files/test_board.txt', 'txt_files/test_users.txt')
+    board = Birdyboard('txt_files/board.txt', 'txt_files/users.txt')
     board.menu()
