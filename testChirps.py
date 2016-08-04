@@ -19,7 +19,7 @@ class Testchirp(unittest.TestCase):
         self.assertEqual(len(self.privateChirp.conversation), startLength + 1)
 
     def test_public_chirp_creation(self):
-        self.assertEqual(self.publicChirp.user, 'sender')
+        self.assertEqual(self.publicChirp.sender, 'sender')
         self.assertEqual(self.publicChirp.message, 'hello world')
         self.assertIsInstance(self.privateChirp.conversation, list)
 
