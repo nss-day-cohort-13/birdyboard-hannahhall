@@ -7,6 +7,10 @@ from chirp import *
 
 class Birdyboard:
     def __init__(self, boardfile, userfile):
+        """
+        On class creation this function opens corrisponding files and loads the data to chosen variables
+        
+        """
         self.currentUser = None
         self.privateRecip = None
         self.userPrivateChirps = {}
@@ -92,7 +96,7 @@ class Birdyboard:
                 chirp = input('Create new public chirp: \n> ')
                 self.newPublicChirp(chirp)
                 self.clearScreen()
-                self.menu()
+                self.chirpMenu()
         elif choice == '5':
             if not self.currentUser:
                 self.checkForUser()
