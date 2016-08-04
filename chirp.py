@@ -11,10 +11,9 @@ class PrivateMessage:
 
 class PublicMessage:
     def __init__(self, user, message):
-        self.user = user
+        self.sender = user
         self.message = message
         self.conversation = []
 
-    def reply(self, user, message):
-        self.conversation.append({user: message})
-        
+    def reply(self, sender, message):
+        self.conversation.append({sender: message})
