@@ -255,7 +255,7 @@ class Birdyboard:
         os.system('clear')
 
     def checkForUser(self):
-        """Checks to make sure user has chosen a current user before reading or creating chirps"""
+        """In the main menu, if there is not a current user this function runs"""
         self.clearScreen()
         print("Please select or create a new user before continuing")
         self.menu()
