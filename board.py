@@ -254,7 +254,7 @@ class Birdyboard:
         """Clears cli of clutter"""
         os.system('clear')
 
-    def checkForUser(self):
+    def promptForUser(self):
         """In the main menu, if there is not a current user this function runs"""
         self.clearScreen()
         print("Please select or create a new user before continuing")
