@@ -131,9 +131,7 @@ class Birdyboard:
 
     def newUser(self, name, username):
         """Creates a new user and stores it in file and as currentUser"""
-        existingUsers = []
-        for user in self.users:
-            existingUsers.append(user.username)
+        existingUsers = [user.username for user in self.users]
         if not username in existingUsers:
             user = User(name, username)
             self.users.append(user)
