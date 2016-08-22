@@ -1,5 +1,7 @@
 import unittest
-from chirp import *
+from chirp import PublicMessage
+from chirp import PrivateMessage
+
 
 class Testchirp(unittest.TestCase):
     @classmethod
@@ -28,8 +30,5 @@ class Testchirp(unittest.TestCase):
         self.publicChirp.reply('sender', 'message')
         self.assertEqual(len(self.publicChirp.conversation), startLength + 1)
 
-
-
-
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()

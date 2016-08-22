@@ -1,4 +1,3 @@
-import random
 class PrivateMessage:
     def __init__(self, user, receiver, message):
         self.sender = user
@@ -8,6 +7,7 @@ class PrivateMessage:
 
     def reply(self, sender, message):
         self.conversation.append({sender: message})
+
 
 class PublicMessage:
     def __init__(self, user, message):

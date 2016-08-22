@@ -2,8 +2,10 @@ import uuid
 import pickle
 import os
 import sys
-from user import *
-from chirp import *
+from user import User
+from chirp import PrivateMessage
+from chirp import PublicMessage
+
 
 class Birdyboard:
     def __init__(self, boardfile, userfile):
@@ -123,7 +125,6 @@ class Birdyboard:
 
     def printAllUsers(self):
         """Prints a list of users"""
-        userLength = len(self.users)
         counter = 1
         for user in self.users:
             print(str(counter) + '. ' + user.username)
@@ -132,7 +133,7 @@ class Birdyboard:
     def newUser(self, name, username):
         """Creates a new user and stores it in file and as currentUser"""
         existingUsers = [user.username for user in self.users]
-        if not username in existingUsers:
+        if username not in existingUsers:
             user = User(name, username)
             self.users.append(user)
             self.currentUser = user
@@ -205,7 +206,6 @@ class Birdyboard:
         except AttributeError:
             pass
         return self.listofChirps
-
 
     def findPrivateChirps(self):
         """Find current users private chirps"""

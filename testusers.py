@@ -1,5 +1,6 @@
 import unittest
-from user import *
+from user import User
+
 
 class Testuser(unittest.TestCase):
     @classmethod
@@ -11,8 +12,5 @@ class Testuser(unittest.TestCase):
         self.assertEqual(self.gary.username, 'gary101')
         self.assertTrue(self.gary.userId)
 
-
-
-
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()

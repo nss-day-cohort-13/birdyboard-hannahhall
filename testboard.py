@@ -1,5 +1,6 @@
 import unittest
-from board import *
+from board import Birdyboard
+
 
 class Testboard(unittest.TestCase):
     @classmethod
@@ -22,7 +23,7 @@ class Testboard(unittest.TestCase):
         self.assertEqual(self.board.privateRecip.username, 'gary101')
 
     def test_new_public_chirp(self):
-        #must select user before creating chirp
+        # must select user before creating chirp
         self.board.selectUser(2)
         newchirp = "Hello World"
         startLength = len(self.board.chirps['public'])
@@ -30,7 +31,7 @@ class Testboard(unittest.TestCase):
         self.assertEqual(startLength + 1, len(self.board.chirps['public']))
 
     def test_new_private_chirp(self):
-        #must select user before creating chirp
+        # must select user before creating chirp
         self.board.selectUser(1)
         recipient = self.board.selectRecipient(2)
         newchirp = "Hello gary!"
@@ -52,16 +53,11 @@ class Testboard(unittest.TestCase):
         self.board.selectUser(2)
         updatedChirp = None
         replyTo = self.board.getListofChirps()[0]
-        #use for in loop to find the value that matches the reply to chirp
+        # use for in loop to find the value that matches the reply to chirp
         for key, value in self.board.chirps['private'].items():
             if value == replyTo:
                 updatedChirp = value
         self.assertEqual(updatedChirp, replyTo)
 
-
-
-
-
-
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()
